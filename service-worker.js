@@ -6,6 +6,8 @@ const CACHE_FILES = ['cat'];
 
 self.addEventListener('install', e => {
   console.log('install', e);
+
+  e.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', e => {
@@ -15,7 +17,7 @@ self.addEventListener('activate', e => {
     .then(keys => keys.filter(key => key !== CACHE_NAME))
     .then(keys => Promise.all(keys.map(key => caches.delete(key))));
 
-  e.waitUntil(deletion);
+  e.waitUntil(deletion.then(() => self.clients.claim()));
 });
 
 self.addEventListener('fetch', e => {
