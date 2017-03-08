@@ -24,28 +24,29 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  const pathname = e.request.url.replace(location.href, '');
+
   if (!CACHE_FILES.some(file => e.request.url.includes(file))) {
-    console.log(`❌ ${e.request.url} is not a cache target`);
+    console.log(`❌ ${pathname} is not a target`);
     return;
-  } else {
-    console.log(`✅ ${e.request.url} is a cache target`);
   }
 
   const cache = caches.match(e.request).then(response => {
     if (response) {
-      console.log(`✅ cache for ${e.request.url} is found`);
+      console.log(`☀️ cache for ${pathname} found`);
       return response;
     } else {
-      console.log(`❌ cache for ${e.request.url} is not found`);
+      console.log(`☁️ cache for ${pathname} not found`);
     }
 
     return fetch(e.request.clone()).then(response => {
       if (response.ok) {
         const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+        caches.open(CACHE_NAME)
+          .then(cache => cache.put(e.request, clone))
+          .then(() => console.log(`🌤 ${pathname} is cached`));
       }
 
-      console.log(`✅ fallback request for ${e.request.url}`);
       return response;
     });
   });
