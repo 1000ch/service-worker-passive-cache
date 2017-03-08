@@ -1,13 +1,8 @@
 'use strict';
 
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 2;
 const CACHE_NAME = `v${CACHE_VERSION}`;
-const CACHE_FILES = [
-  'character',
-  'dot',
-  'bamboo',
-  'honor'
-];
+const CACHE_FILES = ['cat'];
 
 self.addEventListener('install', e => {
   console.log('install', e);
