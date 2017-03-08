@@ -1,0 +1,1 @@
+# Service Worker passive cache

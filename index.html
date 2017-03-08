@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Service Worker passive cache</title>
+    <script>
+      navigator.serviceWorker.register('service-worker.js', {
+        scope: location.pathname
+      }).then(() => {
+        return navigator.serviceWorker.ready;
+      }).then(registration => {
+        console.log(registration);
+      }).catch(error => {
+        console.error(error);
+      });
+    </script>
+    <link rel="stylesheet" href="./primer.css">
+    <link rel="stylesheet" href="./primer-markdown.css">
+  </head>
+  <body>
+    <div class="container markdown-body">
+      <h1>Service Worker passive cache</h1>
+      <p>Service Worker passive cache demo.</p>
+      <div>
+        <img src="img/character/1.png">
+        <img src="img/character/2.png">
+        <img src="img/character/3.png">
+        <img src="img/character/4.png">
+        <img src="img/character/5.png">
+        <img src="img/character/6.png">
+        <img src="img/character/7.png">
+        <img src="img/character/8.png">
+        <img src="img/character/9.png">
+      </div>
+      <div>
+        <img src="img/dot/1.png">
+        <img src="img/dot/2.png">
+        <img src="img/dot/3.png">
+        <img src="img/dot/4.png">
+        <img src="img/dot/5.png">
+        <img src="img/dot/6.png">
+        <img src="img/dot/7.png">
+        <img src="img/dot/8.png">
+        <img src="img/dot/9.png">
+      </div>
+      <div>
+        <img src="img/bamboo/1.png">
+        <img src="img/bamboo/2.png">
+        <img src="img/bamboo/3.png">
+        <img src="img/bamboo/4.png">
+        <img src="img/bamboo/5.png">
+        <img src="img/bamboo/6.png">
+        <img src="img/bamboo/7.png">
+        <img src="img/bamboo/8.png">
+        <img src="img/bamboo/9.png">
+      </div>
+      <div>
+        <img src="img/honor/1.png">
+        <img src="img/honor/2.png">
+        <img src="img/honor/3.png">
+        <img src="img/honor/4.png">
+        <img src="img/honor/5.png">
+        <img src="img/honor/6.png">
+        <img src="img/honor/7.png">
+      </div>
+    </div>
+  </body>
+</html>
