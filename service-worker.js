@@ -24,7 +24,7 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  const pathname = e.request.url.replace(location.href, '');
+  const pathname = new URL(e.request.url).pathname;
 
   if (!CACHE_FILES.some(file => e.request.url.includes(file))) {
     console.log(`❌ ${pathname} is not a target`);
