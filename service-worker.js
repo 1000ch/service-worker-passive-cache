@@ -24,7 +24,7 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  const pathname = new URL(e.request.url).pathname;
+  const pathname = new URL(e.request.url).pathname.replace('/service-worker-passive-cache', '');
 
   if (!CACHE_FILES.some(file => e.request.url.includes(file))) {
     console.log(`❌ ${pathname} is not a target`);
