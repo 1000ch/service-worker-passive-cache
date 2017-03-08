@@ -21,19 +21,20 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  const pathname = new URL(e.request.url).pathname.replace('/service-worker-passive-cache', '');
+  const url = new URL(e.request.url);
+  const pathname = url.pathname.replace('/service-worker-passive-cache', '');
 
   if (!CACHE_FILES.some(file => e.request.url.includes(file))) {
-    console.log(`❌ ${pathname} is not a target`);
+    console.log(`☔ [${pathname}] is not a target`);
     return;
   }
 
   const cache = caches.match(e.request).then(response => {
     if (response) {
-      console.log(`☀️ cache for ${pathname} found`);
+      console.log(`🌈 [${pathname}] cache found`);
       return response;
     } else {
-      console.log(`☁️ cache for ${pathname} not found`);
+      console.log(`☁️ [${pathname}] cache not found`);
     }
 
     return fetch(e.request.clone()).then(response => {
@@ -41,7 +42,7 @@ self.addEventListener('fetch', e => {
         const clone = response.clone();
         caches.open(CACHE_NAME)
           .then(cache => cache.put(e.request, clone))
-          .then(() => console.log(`🌤 ${pathname} is cached`));
+          .then(() => console.log(`🌤 [${pathname}] cached`));
       }
 
       return response;
